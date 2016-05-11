@@ -15,12 +15,16 @@ class ReviewsController < ApplicationController
         @places = {}
         #Don't attempt to display places without valid coordinates.
         
+        @test=@ip 
+        @lat =lat
+        @long =long
+        
         
         unless lat.nil? || long.nil?
             #@test = location.longitude #l.inspect
         
             #Retrieve a colection of nearby places. 
-            @places = @client.spots(lat, long, :radius => 10000)
+            @places = @client.spots(lat, long, :radius => 10000000)
             
             p @places.inspect
         end
@@ -32,6 +36,13 @@ class ReviewsController < ApplicationController
 =begin
       p "happy."
       p session[:user]
+<<<<<<< HEAD
+<<<<<<< HEAD
+      @review = Review.create! :stars => params["review"]["stars"],:description => params["review"]["description"],:business_id => params["review"]["business_id"]
+        redirect_to new_review_path(session[:user]["id"])
+=======
+=======
+>>>>>>> BRP-MAIN/master
       @review = Review.create! :stars => params["review"]["stars"],:description => params["review"]["description"], :business_id => params["review"]["business_id"]
         flash[:warning] = "Params: #{params.inspect}"
 =end
@@ -59,7 +70,6 @@ class ReviewsController < ApplicationController
         flash[:notice] = bus.id
 
         redirect_to user_path(session[:user]["id"])
-
     end
     
 
